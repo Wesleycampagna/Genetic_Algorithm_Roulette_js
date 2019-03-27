@@ -1,0 +1,15 @@
+{
+  "name": "ia_generic_algorithm",
+  "version": "1.0.0",
+  "description": "packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "wesley campagna",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
+  }
+}
