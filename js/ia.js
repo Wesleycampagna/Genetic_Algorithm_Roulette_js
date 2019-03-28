@@ -7,11 +7,11 @@ const TAX_OF_CROSSOVER = 0.6
 const TAX_OF_MUTATION = 0.02
 const NUMBER_OF_INDIVIDUALS = 8
 const FLOOR_CEIL_CP = 2
-let count = 3000
+const MAX_STACK = 3000
 let generation = 0
 
 
-var object = {
+const object = {
     lines: 4, 
     collumn: 4,
     numberOfIndividuals: NUMBER_OF_INDIVIDUALS
@@ -22,7 +22,7 @@ const DIMENSION = object.lines * object.collumn
 const OBJECTIVE = generate.objective(DIMENSION)
 
 
-function recursiveAlgorith (matrizP, count) {
+function recursiveAlgorith (matrizP, MAX_STACK) {
     
     /* calcula a distancia de Hamming -> bits incorretos em relação ao valor objetivo do vetor */
     let hammingDistance = generate.getHammingDistance(matrizP, OBJECTIVE)
@@ -30,7 +30,7 @@ function recursiveAlgorith (matrizP, count) {
     /* calcula a diferença em relação ao valor ideal do vetor */
     let allFitness = generate.getFitness(hammingDistance, object)
     
-    count > 1 ? isFinal = false : isFinal = true
+    MAX_STACK > 1 ? isFinal = false : isFinal = true
 
     console.log(matrizP);    
     console.log('\nGENERATION: ' + ++generation);    
@@ -41,13 +41,13 @@ function recursiveAlgorith (matrizP, count) {
     if (! isFinal && !isMaxFitness(allFitness)) {
         
         /* atribui a porcentagem de cada individuo baseada no calculo de seu fitness  */
-        porcentualRoulette = generate.getRoulette(allFitness)
+        let porcentualRoulette = generate.getRoulette(allFitness)
         
         /* sorteia porcentagens aleatórias */
-        randomicRoulette = getRandomicRoulette (NUMBER_OF_INDIVIDUALS)
+        let randomicRoulette = getRandomicRoulette (NUMBER_OF_INDIVIDUALS)
         
         /* seleciona individuos para realização do crossover -> retorna o indice de vetor dos elementos selecionados  */
-        selectedElementsToCrossover = selectCrossover(randomicRoulette, porcentualRoulette)
+        let selectedElementsToCrossover = selectCrossover(randomicRoulette, porcentualRoulette)
         
         /* seleciona os escolhidos pelo Roulette e atribui na MatrizP */
         matrizP = setNewPopulation(selectedElementsToCrossover, matrizP)
@@ -58,11 +58,11 @@ function recursiveAlgorith (matrizP, count) {
         /* adiciona uma mutação flutuante de 0,02% de chance de acontecimento */
         matrizP = mutation(matrizP)
         
-        -- count
+        -- MAX_STACK
 
         console.log('\n')
 
-        recursiveAlgorith(matrizP, count)
+        recursiveAlgorith(matrizP, MAX_STACK)
     }
 
     else
@@ -229,14 +229,14 @@ function getMedia(vector) {
 /* ------------------------------------------------------------------ */
 
 /* chamada Inicial acontece aqui */
-var matrizP = new generate.MatrizP(object)
+let matrizP = new generate.MatrizP(object)
 matrizP.create()
 
 let isFinal = false;
 
 matriz = matrizP.getMatrizP()
 
-recursiveAlgorith(matriz, count)
+recursiveAlgorith(matriz, MAX_STACK)
 
 
 /* ----------------------------------------------------------------- */

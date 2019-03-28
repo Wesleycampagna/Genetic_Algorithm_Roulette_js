@@ -137,7 +137,7 @@ module.exports.getRoulette = (fitness) => {
 
 module.exports.objective = (dimension) => {
     
-    var obj = new Array()
+    let obj = new Array()
 
     for(let i = 0; i < dimension; i++) 
         obj.push(randomize.randomizeBinary())
