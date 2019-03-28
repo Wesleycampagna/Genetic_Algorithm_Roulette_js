@@ -1,12 +1,13 @@
 const generate = require('./generate')
 const randomize = require('./randomize')
 
+
 /* Constants */
 const TAX_OF_CROSSOVER = 0.6
 const TAX_OF_MUTATION = 0.02
 const NUMBER_OF_INDIVIDUALS = 8
 const FLOOR_CEIL_CP = 2
-let count = 800
+let count = 3000
 let generation = 0
 
 
@@ -16,67 +17,40 @@ var object = {
     numberOfIndividuals: NUMBER_OF_INDIVIDUALS
 }
 
+
 const DIMENSION = object.lines * object.collumn
 const OBJECTIVE = generate.objective(DIMENSION)
 
 
 function recursiveAlgorith (matrizP, count) {
-
-    console.log(matrizP);
     
-    console.log('GENERATION: ' + ++generation);
-
     /* calcula a distancia de Hamming -> bits incorretos em relação ao valor objetivo do vetor */
     let hammingDistance = generate.getHammingDistance(matrizP, OBJECTIVE)
-
-    console.log('obj: ' + OBJECTIVE);
-
-    /* console.log('hammingDistance');
-    console.log(hammingDistance); */
-        
+    
     /* calcula a diferença em relação ao valor ideal do vetor */
     let allFitness = generate.getFitness(hammingDistance, object)
-
-    console.log('fitness: ' + allFitness);
-
-    console.log('media fitness ' + getMedia(allFitness));
     
-    let stop = isMaxFitness(allFitness)
-
-    console.log('stop: ' + stop);
-
     count > 1 ? isFinal = false : isFinal = true
 
+    console.log(matrizP);    
+    console.log('\nGENERATION: ' + ++generation);    
+    console.log('obj: ' + OBJECTIVE);
+    console.log('fitness: ' + allFitness);
+    console.log('media fitness ' + getMedia(allFitness));    
 
-       if (! isFinal && !stop) {
-           
-        /* console.log('--- fitness');
-        console.log(allFitness)    */ 
-        
+    if (! isFinal && !isMaxFitness(allFitness)) {
         
         /* atribui a porcentagem de cada individuo baseada no calculo de seu fitness  */
         porcentualRoulette = generate.getRoulette(allFitness)
-
-        /* console.log('---- porcentual roulette');
-        console.log(porcentualRoulette); */
         
         /* sorteia porcentagens aleatórias */
-        let randomicRoulette = getRandomicRoulette (NUMBER_OF_INDIVIDUALS)
-
-
-        /* console.log('randomic roulette');
-        console.log(randomicRoulette) */
+        randomicRoulette = getRandomicRoulette (NUMBER_OF_INDIVIDUALS)
         
         /* seleciona individuos para realização do crossover -> retorna o indice de vetor dos elementos selecionados  */
-        let selectedElementsToCrossover = selectCrossover(randomicRoulette, porcentualRoulette)
+        selectedElementsToCrossover = selectCrossover(randomicRoulette, porcentualRoulette)
         
-        console.log('position vetor: ');
-        console.log(selectedElementsToCrossover)
-
         /* seleciona os escolhidos pelo Roulette e atribui na MatrizP */
         matrizP = setNewPopulation(selectedElementsToCrossover, matrizP)
-
-        console.log(matrizP);
 
         /* crossover escolhendo alguns dos elementos para crossover */
         matrizP = crossover(selectedElementsToCrossover, matrizP)
@@ -86,8 +60,13 @@ function recursiveAlgorith (matrizP, count) {
         
         -- count
 
+        console.log('\n')
+
         recursiveAlgorith(matrizP, count)
     }
+
+    else
+        console.log('\nO OBJETIVO FOI CONCLUIDO!\n');
 }
 
 
@@ -133,9 +112,9 @@ function selectCrossover (randomVec, porcentVec) {
 
 function crossover (indexMatrizP, matrizP) {
     let sets = generateSets(indexMatrizP)
-
+    
+    console.log('escolha de individuos para crossover: ');
     console.log(sets)
-    console.log('\n');
 
     sets.forEach(element => {
 
@@ -157,7 +136,6 @@ function crossover (indexMatrizP, matrizP) {
                 matrizP[element[0]] = result
                 console.log('enter');
             }
-
             result = cross(two, one, cp)            
             if ( result > generate.fitness(matrizP[element[1]]) ) {
                 matrizP[element[1]] = result
@@ -174,6 +152,7 @@ function crossover (indexMatrizP, matrizP) {
 
     return matrizP
 }
+
 
 function generateSets(vector){
     
@@ -222,9 +201,11 @@ function setNewPopulation(selectCrossover, matrizP){
 function mutation (matriz) {
 
     for (let i = 0; i < NUMBER_OF_INDIVIDUALS; i++){
+
         for (let j = 0; j < DIMENSION; j ++){
+            
             if ((randomize.randomize(100) / 100) <= TAX_OF_MUTATION){
-                console.log('MUTATION: [' + i + ' ][ ' + j + ' ]');
+                console.log('MUTATION: [ ' + i + ' ][ ' + j + ' ]');
                 matriz[i][j] == 0 ? matriz[i][j] = 1 : matriz[i][j] = 0
             }
         }
