@@ -1,19 +1,45 @@
 const generate = require('./generate')
 const randomize = require('./randomize')
+const init = require('../../modules/Initialize')
 
+/* recebe um 'Object' from init */
+/* let initialize = init.initialize({    
+    numberOfIndividuals: 20,
+    taxOfCrossover: 0.6,
+    taxOfMutation: 0.2,
+    maxStack: 3000,
+    lines: 4,
+    collumn: 4
+}); */
+
+//let initialize = init.initialize({})
 
 /* Constants */
-const TAX_OF_CROSSOVER = 0.6
+/* const TAX_OF_CROSSOVER = 0.6
 const TAX_OF_MUTATION = 0.02
-const NUMBER_OF_INDIVIDUALS = 8
-const FLOOR_CEIL_CP = 2
+const NUMBER_OF_INDIVIDUALS = 70
 const MAX_STACK = 3000
+const LINES = 3
+const COLLUMN = 3 */
+
+let initialize = init.initialize({});
+
+
+const TAX_OF_CROSSOVER = initialize.taxOfCrossover
+const TAX_OF_MUTATION = initialize.taxOfMutation
+const NUMBER_OF_INDIVIDUALS = initialize.numberOfIndividuals
+const MAX_STACK = initialize.stack
+const LINES = initialize.lines
+const COLLUMN = initialize.collumn
+
+//process.exit()
+
+const FLOOR_CEIL_CP = 2
 let generation = 0
 
-
 const object = {
-    lines: 4, 
-    collumn: 4,
+    lines: LINES, 
+    collumn: COLLUMN,
     numberOfIndividuals: NUMBER_OF_INDIVIDUALS
 }
 

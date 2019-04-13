@@ -34,7 +34,7 @@ Execute the code line:
 
 - GUI for Client-side 
 
- create a graphic interface using <HTML> and <CSS> - exists in the prototype of that project - where the user will specify by selector (imagined initially like a drag over) the metrics of: `TAX_OF_CROSSOVER`, `TAX_OF_MUTATION`, `NUMBER_OF_INDIVIDUALS`, `FLOOR_CEIL_CP`, `MAX_STACK`. Some of This will contain a checkbox that references a standard value. With that, will be possible determinate from client-side the metrics to which the algorithm will work with. 
+ create a graphic interface using `HTML` and `CSS` - exists in the prototype of that project - where the user will specify by selector (imagined initially like a drag over) the metrics of: `TAX_OF_CROSSOVER`, `TAX_OF_MUTATION`, `NUMBER_OF_INDIVIDUALS`, `FLOOR_CEIL_CP`, `MAX_STACK`. Some of This will contain a checkbox that references a standard value. With that, will be possible determinate from client-side the metrics to which the algorithm will work with. 
 
  Exists yet a doubt related if javascript's script should be send to client-side when GET method is called or that should be mantain in server-side sending continuously data to other side. 
 

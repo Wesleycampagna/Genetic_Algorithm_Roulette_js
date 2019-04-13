@@ -1,4 +1,4 @@
-const randomize = require('../js/randomize')
+const randomize = require('./randomize')
 
 /**
  * Create the matriz [object.lines][object.collumn]
