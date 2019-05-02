@@ -14,6 +14,10 @@ const init = require('../../modules/Initialize')
 
 //let initialize = init.initialize({})
 
+
+
+
+
 /* Constants */
 /* const TAX_OF_CROSSOVER = 0.6
 const TAX_OF_MUTATION = 0.02
@@ -22,7 +26,7 @@ const MAX_STACK = 3000
 const LINES = 3
 const COLLUMN = 3 */
 
-let initialize = init.initialize({});
+let initialize = init({});
 
 
 const TAX_OF_CROSSOVER = initialize.taxOfCrossover
@@ -156,7 +160,8 @@ function crossover (indexMatrizP, matrizP) {
             a quebra so pode acontecer da segunda posição até a décima */
             let cp = randomize.randomizeRange(FLOOR_CEIL_CP, DIMENSION - FLOOR_CEIL_CP)
 
-            /* Aqui ele deve ser mais eficiente ainda --> não faz a troca genetica qndo o resultado não é melhor que o anterior
+            /* //Aqui ele deve ser mais eficiente ainda (não) --> não faz a troca genetica qndo o resultado 
+            // não é melhor que o anterior
             let result = cross(one, two, cp)
             if ( result > generate.fitness(matrizP[element[0]]) ) {
                 matrizP[element[0]] = result
@@ -165,8 +170,8 @@ function crossover (indexMatrizP, matrizP) {
             result = cross(two, one, cp)            
             if ( result > generate.fitness(matrizP[element[1]]) ) {
                 matrizP[element[1]] = result
-                console.log('enter2');
-            } */
+                console.log('enter2'); 
+            }*/
 
             matrizP[element[0]] = cross(one, two, cp)        
             matrizP[element[1]] = cross(two, one, cp)            

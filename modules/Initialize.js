@@ -1,10 +1,10 @@
 
-exports.initialize = (obj) => {
+module.exports = (obj) => {
     
-    t_numberOfIndividuals = obj.numberOfIndividuals || 5
+    t_numberOfIndividuals = obj.numberOfIndividuals || 6
     t_taxOfCrossover = obj.taxOfCrossover || 0.6
     t_taxOfMutation = obj.taxOfMutation || 0.2
-    t_stack =  obj.maxStack || 3000
+    t_stack =  obj.maxStack || 1000
     t_lines =  obj.lines || 3
     t_collumn = obj.collumn || 3
 

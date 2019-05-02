@@ -23,7 +23,7 @@ main.get('/', (request, response) => {
     &lines=5&collumn=5&maxStack=4000
 
     */
-    response.send(init.initialize(request.query))
+    response.send(init(request.query))
 })
 
 main.get('/t', (req, res) => {
